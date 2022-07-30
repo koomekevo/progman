@@ -10,7 +10,7 @@ const {
     GraphQLString,
     GraphQLSchema,
     GraphQLList,
-    GraphQLNonNull
+    GraphQLNonNull,
 } = require('graphql');
 
 // Project Type
@@ -85,19 +85,19 @@ const mutation = new GraphQLObjectType({
                 phone: { type: GraphQLNonNull(GraphQLString) },
             },
             resolve(parent, args) {
-                const client = new Client ({
+                const client = new Client({
                     name: args.name,
                     email: args.email,
                     phone: args.phone,
                 });
-                return client.save();
 
-                Client.create
-            }
-        }
-    }
-})
+                return client.save();
+            },
+        },
+    },
+});
 
 module.exports = new GraphQLSchema({
-    query: RootQuery
-})
+    query: RootQuery,
+    mutation
+});
