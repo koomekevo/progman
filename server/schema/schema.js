@@ -4,7 +4,14 @@ const { projects, clients } = require('../sampleData');
 const Project = require('../models/Project');
 const Client = require('../models/Client');
 
-const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLSchema, GraphQLList } = require('graphql');
+const {
+    GraphQLObjectType,
+    GraphQLID,
+    GraphQLString,
+    GraphQLSchema,
+    GraphQLList,
+    GraphQLNonNull
+} = require('graphql');
 
 // Project Type
 const ProjectType = new GraphQLObjectType({
@@ -40,7 +47,7 @@ const RootQuery = new GraphQLObjectType({
         projects: {
             type: new GraphQLList(ProjectType),
             resolve(parent, args) {
-               return Project.find();
+                return Project.find();
             },
         },
         project: {
@@ -64,6 +71,19 @@ const RootQuery = new GraphQLObjectType({
             },
         },
     },
+});
+
+// Mutations
+const mutation = new GraphQLObjectType({
+    name: 'Mutation',
+    fields: {
+        addClient: {
+            type: ClientType,
+            args: {
+                name: { type: GraphQLNonNull(GraphQLString) },
+            }
+        }
+    }
 })
 
 module.exports = new GraphQLSchema({
