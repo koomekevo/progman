@@ -110,7 +110,7 @@ const mutation = new GraphQLObjectType({
             type: ProjectType,
             args: {
                 name: { type: GraphQLNonNull(GraphQLString) },
-                description: { type: GraphQLNonNull(GraphQLString) }, 
+                description: { type: GraphQLNonNull(GraphQLString) },
                 status: {
                     type: new GraphQLEnumType({
                         name: 'ProjectStatus',
@@ -128,11 +128,12 @@ const mutation = new GraphQLObjectType({
                 const project = new Project({
                     name: args.name,
                     description: args.description,
-                    status: args.clientId,
+                    status: args.status,
+                    clientId: args.clientId,
                 });
 
                 return project.save();
-            }
+            },
         },
     },
 });
