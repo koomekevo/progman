@@ -11,6 +11,7 @@ const {
     GraphQLSchema,
     GraphQLList,
     GraphQLNonNull,
+    GraphQLEnumType,
 } = require('graphql');
 
 // Project Type
@@ -110,6 +111,18 @@ const mutation = new GraphQLObjectType({
             args: {
                 name: { type: GraphQLNonNull(GraphQLString) },
                 description: { type: GraphQLNonNull(GraphQLString) }, 
+                status: {
+                    type: new GraphQLEnumType({
+                        name: 'ProjectStatus',
+                        values: {
+                            'new': { value: 'Not Started' },
+                            'progress': { value: 'In progress' },
+                            'completed': { value: 'Completed' },
+                        }
+                    }),
+                    defaultValue: 'Not Started',
+                },
+                clientId: { type: GraphQLNonNull(GraphQLID) },
             }
         }
     },
