@@ -3,6 +3,15 @@ import { FaUser } from "react-icons/fa";
 import { useMutation } from "@apollo/client";
 
 export default function AddClientModal() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(name, email, phone);
+  }
+  
   return (
     <>
       <button
@@ -11,7 +20,10 @@ export default function AddClientModal() {
         data-bs-toggle="modal"
         data-bs-target="#addClientModal"
       >
-        Add Client
+        <div className="d-flex align-items-center">
+          <FaUser className="icon" />
+          <div>Add Client</div>
+        </div>
       </button>
 
       <div
@@ -33,18 +45,40 @@ export default function AddClientModal() {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">...</div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
-              </button>
+            <div className="modal-body">
+              <form onSubmit={onSubmit}>
+                <div className="mb-3">
+                  <label className="form-label">Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Phone</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="phone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
+                <button type="submit" data-bs-dismiss="modal" className="btn btn-secondary">Submit</button>
+              </form>
             </div>
           </div>
         </div>
