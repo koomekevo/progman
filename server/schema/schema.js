@@ -145,6 +145,15 @@ const mutation = new GraphQLObjectType({
                 return Project.findByIdAndRemove(args.id);
             },
         },
+        // Update a project
+        updateProject: {
+            type: ProjectType,
+            args: {
+                id: { type: GraphQLNonNull(GraphQLID) },
+                name: { type: GraphQLString },
+                description: { type: GraphQLString },
+            }
+        }
     },
 });
 
