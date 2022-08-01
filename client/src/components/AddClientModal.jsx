@@ -23,7 +23,12 @@ export default function AddClientModal() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(name, email, phone);
+
+    if (name === "" || email === "" || phone === "") {
+      return alert("Please fill in all fields");
+    }
+
+    addClient(name, email, phone);
   };
 
   return (
